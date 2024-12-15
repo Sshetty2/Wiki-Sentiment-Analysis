@@ -6,8 +6,7 @@ import {
   createTheme,
   CssBaseline,
   Typography,
-  Skeleton,
-  Fade
+  Skeleton
 } from '@mui/material';
 import SentimentRadarChart from './components/SentimentRadarChart';
 import SearchBar from './components/SearchBar';

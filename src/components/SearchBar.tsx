@@ -3,8 +3,7 @@ import Autosuggest from 'react-autosuggest';
 import { Search } from 'lucide-react';
 import { Box, styled } from '@mui/material';
 import debounce from 'lodash/debounce';
-import { WikiResponse, WikiSuggestion } from '../types/WikiTypes';
-import { generateSearchUrl } from '../api/endpoints';
+import { WikiSuggestion } from '../types/WikiTypes';
 import { fetchWikiResultsWithSearchText } from '../api/wiki-requests';
 
 const SearchWrapper = styled(Box)(({ theme }) => ({
