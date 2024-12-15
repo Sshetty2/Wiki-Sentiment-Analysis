@@ -1,3 +1,5 @@
+Live App at: https://www.wiki-sentiment-analyzer.wiki/
+
 # Wiki Sentiment Analysis
 
 A React application that visualizes emotional sentiments from Wikipedia articles using IBM Watson's Natural Language Understanding model. The application processes Wikipedia content through AWS Lambda functions to analyze emotional sentiment patterns and presents the data through interactive visualizations.
