@@ -8,20 +8,18 @@ interface Emotion {
 }
 
 interface RadarChartProps {
-  data?: {
-    name: string;
-    sentiment: number;
-    emotions: Emotion[];
-  };
+  data?: Emotion[];
+  selectedEntity?: string;
+  isLoading?: boolean;
 }
 
-const SentimentRadarChart: React.FC<RadarChartProps> = ({ data }) => {
+const SentimentRadarChart: React.FC<RadarChartProps> = ({ data, selectedEntity }) => {
   const theme = useTheme();
   const [chartData, setChartData] = useState<Emotion[]>([]);
 
   useEffect(() => {
-    if (data?.emotions) {
-      setChartData(data.emotions);
+    if (data) {
+      setChartData(data);
     }
   }, [data]);
 
@@ -56,9 +54,8 @@ const SentimentRadarChart: React.FC<RadarChartProps> = ({ data }) => {
           color    : theme.palette.primary.main
         }}
       >
-        {data.name}
+        {selectedEntity}
       </Typography>
-
       <ResponsiveContainer width="100%" height="80%">
         <RadarChart data={chartData}>
           <PolarGrid
@@ -92,16 +89,6 @@ const SentimentRadarChart: React.FC<RadarChartProps> = ({ data }) => {
           />
         </RadarChart>
       </ResponsiveContainer>
-
-      <Typography
-        sx={{
-          textAlign: 'center',
-          mt       : 1,
-          color    : data.sentiment >= 0 ? 'success.main' : 'error.main'
-        }}
-      >
-        Sentiment Score: {data.sentiment.toFixed(3)}
-      </Typography>
     </Box>
   );
 };
