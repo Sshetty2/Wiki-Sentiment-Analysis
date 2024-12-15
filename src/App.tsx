@@ -19,8 +19,8 @@ const darkTheme = createTheme({
   palette: {
     mode      : 'dark',
     background: {
-      default: '#202022',
-      paper  : '#1E1E1E'
+      default: '#0b0c12',
+      paper  : '#1e1e1e'
     },
     primary: {
       main: '#90CAF9'
@@ -30,7 +30,7 @@ const darkTheme = createTheme({
     h1: {
       fontSize            : '2.5rem',
       fontWeight          : 600,
-      background          : 'linear-gradient(45deg, #90CAF9 30%, #64B5F6 90%)',
+      background          : 'linear-gradient(45deg, #90CAF9 30%, #0087f3  90%)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor : 'transparent'
     }
@@ -53,7 +53,7 @@ const LogoContainer = styled(Box)(({ theme }) => ({
   justifyContent     : 'center',
   alignItems         : 'center',
   marginBottom       : theme.spacing(4),
-  marginTop          : theme.spacing(4),
+  marginTop          : theme.spacing(6),
   backgroundBlendMode: 'darken',
   '& img'            : {
     width              : '100%',
@@ -67,7 +67,7 @@ const TitleWrapper = styled(Box)(({ theme }) => ({
   width       : '100%',
   textAlign   : 'center',
   marginBottom: theme.spacing(2),
-  marginTop   : theme.spacing(4)
+  marginTop   : theme.spacing(2)
 }));
 const ChartContainer = styled(Box)<{ isLoading?: boolean }>(({ theme, isLoading }) => ({
   width          : '100%',
@@ -114,7 +114,9 @@ const Dashboard: React.FC = () => {
 
     const content = pageData?.content;
 
-    if (content) {
+    if (!content) {
+      setIsLoading(false);
+
       return;
     }
 

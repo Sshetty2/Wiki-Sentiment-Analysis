@@ -1,6 +1,7 @@
 import { Paper, styled, Typography } from '@mui/material';
 
 const ScoreCardContainer = styled(Paper)(({ theme }) => ({
+  backgroundImage: 'none',
   flex           : '0 0 150px', // Reduce base width to 150px
   padding        : theme.spacing(1.5), // Reduce padding
   display        : 'flex',
