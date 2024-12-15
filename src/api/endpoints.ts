@@ -10,3 +10,5 @@ export const generateRawWikiPageDataUrlWithPageTitle = (pageTitle: string) => {
 
   return `https://en.wikipedia.org/w/index.php?title=${formattedTitle}&action=raw`;
 };
+
+export const IBM_NLU_LAMBDA_URL = 'https://4toxa6cx06.execute-api.us-east-1.amazonaws.com/prod';
