@@ -1,14 +1,6 @@
 /* eslint-disable max-len */
 export const generateSearchUrl = (value: string) => `https://en.wikipedia.org/w/api.php?action=query&generator=search&gsrsearch=${encodeURIComponent(value)}&prop=info&inprop=url&format=json&origin=*`;
 
-export const generateAnalyzeTextUrl = (serviceUrl: string) => `${serviceUrl}/v1/analyze?version=2021-08-01`;
+export const IBM_NLU_LAMBDA_URL = 'https://qc12p9pmq1.execute-api.us-east-1.amazonaws.com/prod/ibm-nlu';
 
-export const generateRawWikiPageDataUrlWithPageId = (pageId: number) => `https://en.wikipedia.org/w/index.php?curid=${pageId}&action=raw`;
-
-export const generateRawWikiPageDataUrlWithPageTitle = (pageTitle: string) => {
-  const formattedTitle = pageTitle.replace(/\s+/g, '_');
-
-  return `https://en.wikipedia.org/w/index.php?title=${formattedTitle}&action=raw`;
-};
-
-export const IBM_NLU_LAMBDA_URL = 'https://4toxa6cx06.execute-api.us-east-1.amazonaws.com/prod';
+export const WIKI_DATA_LAMBDA_URL = 'https://qc12p9pmq1.execute-api.us-east-1.amazonaws.com/prod/wiki-data';

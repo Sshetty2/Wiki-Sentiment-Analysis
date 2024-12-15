@@ -10,10 +10,10 @@ import {
 } from '@mui/material';
 import SentimentRadarChart from './components/SentimentRadarChart';
 import SearchBar from './components/SearchBar';
-import { fetchRawWikiPageDataWithPageId, fetchRawWikiPageDataWithPageTitle } from './api/wiki-requests';
 import ScoreCards from './components/ScoreCards';
 import logo from './assets/logo.jpg';
 import { analyzeTextViaLambda } from './api/ibm-nlu-request';
+import { fetchWikiDataViaLambda } from './api/wiki-requests';
 
 const darkTheme = createTheme({
   palette: {
@@ -69,13 +69,13 @@ const TitleWrapper = styled(Box)(({ theme }) => ({
   marginBottom: theme.spacing(2),
   marginTop   : theme.spacing(4)
 }));
-const ChartContainer = styled(Box)<{ loading?: boolean }>(({ theme, loading }) => ({
+const ChartContainer = styled(Box)<{ isLoading?: boolean }>(({ theme, isLoading }) => ({
   width          : '100%',
   maxWidth       : '600px',
   height         : '400px',
   backgroundColor: theme.palette.background.paper,
   borderRadius   : theme.shape.borderRadius * 2,
-  padding        : loading ? 0 : theme.spacing(3),
+  padding        : isLoading ? 0 : theme.spacing(3),
   marginTop      : theme.spacing(4),
   marginBottom   : theme.spacing(8)
 }));
@@ -109,15 +109,16 @@ const Dashboard: React.FC = () => {
     setSearchTerm(term);
 
     setIsLoading(true);
-    let pageData = null;
 
-    if (pageId) {
-      pageData = await fetchRawWikiPageDataWithPageId(pageId);
+    const pageData = await fetchWikiDataViaLambda(value, pageId?.toString());
+
+    const content = pageData?.content;
+
+    if (content) {
+      return;
     }
 
-    pageData = await fetchRawWikiPageDataWithPageTitle(value);
-
-    const nluData = await analyzeTextViaLambda(pageData);
+    const nluData = await analyzeTextViaLambda(content);
 
     const formattedEmotions = formatEmotions(nluData?.emotion?.document?.emotion);
 
@@ -139,7 +140,7 @@ const Dashboard: React.FC = () => {
           </Typography>
         </TitleWrapper>
         <SearchBar handleSearch={handleSearch} searchTerm={searchTerm} />
-        <ChartContainer loading={isLoading}>
+        <ChartContainer isLoading={isLoading}>
           {isLoading ? (
             <Skeleton
               variant="rectangular"
